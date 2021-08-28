@@ -1,14 +1,37 @@
 package com.chun.domain.model
 
-class Anime : BaseObj() {
-    var episodes: Int = -1
-    var airingStart: String = ""
-    var synopsis: String = ""
-    var genres: List<Genre> = emptyList()
-    var licensors: List<String> = emptyList()
-    var r18 = false
-    var kids = false
-    var continuing = false
-    var sources = ""
-    var producers = arrayListOf<Producer>()
-}
+data class Anime(
+    var id: Int = 0,
+    var type: String = "",
+    var url: String = "",
+    var imageUrl: String = "",
+    var trailerUrl: String = "",
+    var title: String = "",
+    var titleEn: String = "",
+    var titleJp: String = "",
+    var titleSynonyms: List<String> = emptyList(),
+    var source: String = "",
+    var status: String = "",
+    var airing: Boolean = false,
+    var aired: Aired = Aired(),
+    var background: String = "",
+    var broadcast: String = "",
+    var duration: String = "",
+    var episodes: Int = 0,
+    var favorites: Int = 0,
+    var genres: List<Simple> = emptyList(),
+    var licensors: List<Simple> = emptyList(),
+    var members: Int = 0,
+    var popularity: Int = 0,
+    var premiered: String = "",
+    var producers: List<Simple> = emptyList(),
+    var rank: Int = 0,
+    var rating: String = "",
+    var related: Related = Related(),
+    var score: Double = 0.0,
+    var scoredBy: Int = 0,
+    var studios: List<Simple> = emptyList(),
+    var synopsis: String = "",
+    var openingThemes: List<String> = emptyList(),
+    var endingThemes: List<String> = emptyList()
+)

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="2dp">
 
-    <TextView
+    <com.chun.anime.ui.widget.SmartTextView
         android:id="@+id/tvTitle"
+        style="@style/Otaku.TextAppearance.Primary.Header.Large"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content" />
 
-    <TextView
+    <com.chun.anime.ui.widget.SmartTextView
         android:id="@+id/tvSubtitle"
+        style="@style/Otaku.TextAppearance.Secondary.Subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitle"
-        android:visibility="gone"
-        android:textSize="13sp" />
+        android:layout_marginTop="2dp" />
 </RelativeLayout>

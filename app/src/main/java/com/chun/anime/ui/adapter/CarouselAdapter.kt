@@ -2,30 +2,26 @@ package com.chun.anime.ui.adapter
 
 import android.content.Context
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.chun.anime.databinding.ItemRecyclerviewBinding
-import com.chun.anime.ui.adapter.vh.ViewHolder
-import com.chun.domain.model.BaseObj
+import com.bumptech.glide.RequestManager
+import com.chun.anime.databinding.ItemCarouselBinding
+import com.chun.anime.ui.base.rv.RvAdapter
+import com.chun.anime.ui.base.rv.ViewHolder
+import com.chun.anime.util.glide.loadThumbnail
+import com.chun.domain.model.Otaku
 
-class CarouselAdapter(context: Context, data: ArrayList<BaseObj>, config: Config) :
-    RvAdapter<BaseObj, ItemRecyclerviewBinding>(
-        context,
-        data,
-        config
-    ) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(ItemRecyclerviewBinding.inflate(inflater, parent, false)).also {
-            it.binding.recyclerView.apply {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                setHasFixedSize(true)
-            }
-        }
+class CarouselAdapter(context: Context, private val requestManager: RequestManager, data: ArrayList<Otaku>) :
+    RvAdapter<Otaku, ItemCarouselBinding>(context, data) {
 
-    override fun onBindViewHolder(holder: ViewHolder<ItemRecyclerviewBinding>, position: Int) {
+    override fun provideViewBinding(parent: ViewGroup, viewType: Int) =
+        ItemCarouselBinding.inflate(inflater, parent, false)
 
-    }
-
-    override fun getViewBinding(parent: ViewGroup, viewType: Int): ItemRecyclerviewBinding {
-        TODO("Not yet implemented")
+    override fun updateViewHolder(holder: ViewHolder<ItemCarouselBinding>, position: Int) {
+        val otaku = data[position]
+        requestManager
+            .loadThumbnail(otaku.imageUrl, isLightTheme)
+            .into(holder.binding.thumbnail)
+        holder.binding.tvDesc.setTitle(otaku.name)
+        holder.itemView.tag = otaku
+        holder.itemView.setOnClickListener { onClick(it) }
     }
 }

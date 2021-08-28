@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
+    <!--common colors-->
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#bdbdbd</color>
     <color name="colorPrimaryInvert">#e5e5e5</color>
-    <color name="colorAccent">#FF5722</color>
+    <color name="colorAccent">#D87840</color>
+    <color name="colorBackground">#FEFEFE</color>
 
-    <color name="textColorPrimary">#1E1E1E</color>
-    <color name="textColorSecondary">#3C3C3C</color>
+    <!--text colors-->
+    <color name="textPrimary">#000000</color>
+    <color name="textPrimaryDisable">#60000000</color>
+    <color name="textSecondary">#3D3D3D</color>
+
+    <color name="textPrimaryBlackOverlay">#fefefe</color>
+    <color name="textSecondaryBlackOverlay">#BFFEFEFE</color>
+
+    <!--background, selector-->
+    <color name="bgBottomNavigation">@color/colorBackground</color>
+    <color name="colorBgItem">#80FEFEFE</color>
+    <color name="colorDivider">#8F8E93</color>
+    <color name="bgBold">#f0eef0</color>
+
+    <!--tint colors-->
+    <color name="colorDrawableTint">#8F8E93</color>
+
+    <color name="homeBnOverlayStartColor">#1AFFFFFF</color>
+    <color name="homeBnOverlayEndColor">@color/colorBackground</color>
 </resources>

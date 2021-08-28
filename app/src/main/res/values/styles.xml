@@ -3,18 +3,93 @@
 
     <style name="Otaku" />
 
-    <style name="Otaku.TextAppearance.Primary" parent="TextAppearance.AppCompat">
+    <style name="Otaku.TextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.Primary" parent="Otaku.TextAppearance">
         <item name="android:textSize">@dimen/text_primary</item>
         <item name="android:textColor">?attr/tcPrimary</item>
     </style>
 
-    <style name="Otaku.TextAppearance.Secondary" parent="TextAppearance.AppCompat">
+    <style name="Otaku.TextAppearance.Secondary" parent="Otaku.TextAppearance">
         <item name="android:textSize">@dimen/text_secondary</item>
         <item name="android:textColor">?attr/tcSecondary</item>
     </style>
 
-    <style name="Otaku.TextAppearance.Small" parent="TextAppearance.AppCompat">
+    <style name="Otaku.TextAppearance.Small" parent="Otaku.TextAppearance">
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">?attr/tcSecondary</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.Primary.Header" parent="Otaku.TextAppearance.Primary">
+        <item name="android:textSize">@dimen/text_header</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.Primary.Header.Xs" parent="Otaku.TextAppearance.Primary.Header">
+        <item name="android:textSize">@dimen/text_header_xs</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.Primary.Header.Large" parent="Otaku.TextAppearance.Primary.Header">
+        <item name="android:textSize">@dimen/text_header_large</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.Secondary.Subtitle" parent="Otaku.TextAppearance">
+        <item name="android:textSize">@dimen/text_primary</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.BottomNavView.Active" parent="Otaku.TextAppearance.Secondary">
+        <item name="android:textColor">?attr/colorAccent</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.BottomNavView.Inactive" parent="Otaku.TextAppearance.Small">
+        <item name="android:textColor">?attr/tcSecondary</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.TextDescView.Title" parent="Otaku.TextAppearance.Primary.Header">
+        <item name="android:textColor">?attr/tcPrimaryBlackOverlay</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.TextDescView.Desc" parent="Otaku.TextAppearance.Secondary">
+        <item name="android:textColor">?attr/tcSecondaryBlackOverlay</item>
+    </style>
+
+
+    <style name="Otaku.Widget.TextView" parent="Otaku.TextAppearance" />
+
+    <style name="Otaku.Widget.TextView.Header" parent="Otaku.TextAppearance.Primary.Header">
+        <item name="android:padding">@dimen/spacing_small</item>
+    </style>
+
+    <style name="Otaku.Widget.TextView.Header.Large" parent="Otaku.TextAppearance.Primary.Header">
+        <item name="android:paddingStart">@dimen/spacing_normal</item>
+        <item name="android:paddingEnd">@dimen/spacing_normal</item>
+        <item name="android:paddingTop">@dimen/spacing_above_normal</item>
+    </style>
+
+    <style name="Otaku.Widget.TextView.Primary" parent="Otaku.TextAppearance.Primary">
+        <item name="android:padding">@dimen/spacing_small</item>
+    </style>
+
+    <style name="Otaku.Widget.TextView.Secondary" parent="Otaku.TextAppearance.Secondary">
+        <item name="android:padding">@dimen/spacing_tiny</item>
+    </style>
+
+    <style name="Otaku.Widget.TextView.Title" parent="Otaku.TextAppearance.Primary">
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="Otaku.Widget.TextView.Title.Inverse">
+        <item name="android:textColor">?attr/tcPrimaryBlackOverlay</item>
+    </style>
+
+    <style name="Otaku.Widget.Button.Rounded" parent="Otaku.TextAppearance.Primary">
+        <item name="android:textSize">@dimen/text_header</item>
+        <item name="android:textColor">?attr/tcPrimaryBlackOverlay</item>
+        <item name="android:background">@drawable/bg_button_rounded</item>
+        <item name="android:minWidth">120dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 </resources>

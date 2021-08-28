@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "519694269880",
+    "project_id": "otakuapp-a3b69",
+    "storage_bucket": "otakuapp-a3b69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519694269880:android:63bbe89cdb3ddea437e34d",
+        "android_client_info": {
+          "package_name": "com.chun.animedi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519694269880-8ecbtct738k2jigv4c59da5lujfp33ab.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjoU5TtmxY7rUj4sLNshh1wlKVMrJiArA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519694269880-8ecbtct738k2jigv4c59da5lujfp33ab.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

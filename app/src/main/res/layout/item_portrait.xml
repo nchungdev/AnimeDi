@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.chun.anime.ui.widget.RatioImageView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/thumbnail"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:adjustViewBounds="true"
-    app:ratio="4:3"
-    tools:ignore="ContentDescription" />
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:cardBackgroundColor="@color/colorBackground"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <com.chun.anime.ui.widget.RatioImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:transitionName="@string/transition_thumbnail"
+        app:ratio="@string/portrait_ratio"
+        tools:ignore="ContentDescription" />
+
+    <com.chun.anime.ui.widget.SmartTextView
+        android:id="@+id/tvTitle"
+        style="@style/Otaku.TextAppearance.Primary.Header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/spacing_small" />
+</androidx.cardview.widget.CardView>

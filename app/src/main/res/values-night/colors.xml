@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--common colors-->
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryInvert">#000000</color>
+    <color name="colorAccent">#D87840</color>
+    <color name="colorBackground">#000000</color>
+
+    <!--text colors-->
+    <color name="textPrimary">#FFFFFF</color>
+    <color name="textPrimaryDisable">#60ffffff</color>
+    <color name="textSecondary">#E8E4DF</color>
+
+    <color name="textPrimaryBlackOverlay">#fefefe</color>
+    <color name="textSecondaryBlackOverlay">#BFFEFEFE</color>
+
+    <!--background, selector-->
+    <color name="bgBottomNavigation">#F20C0C0C</color>
+    <color name="colorBgItem">#80000000</color>
+    <color name="colorDivider">#8E8D92</color>
+    <color name="bgBold">#0f0f17</color>
+
+    <!--tint colors-->
+    <color name="colorDrawableTint">#8E8D92</color>
+
+    <color name="homeBnOverlayStartColor">#33151621</color>
+    <color name="homeBnOverlayEndColor">@color/colorBackground</color>
+</resources>

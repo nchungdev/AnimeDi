@@ -1,6 +1,9 @@
 package com.chun.anime
 
 import android.app.Application
+import com.chun.anime.util.Connection
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.initialize
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import timber.log.Timber.DebugTree
@@ -14,6 +17,8 @@ class AnimeApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Connection.initialize(this)
+        Firebase.initialize(this)
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }
