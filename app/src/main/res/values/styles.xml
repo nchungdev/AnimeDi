@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Otaku" />
+
+    <style name="Otaku.TextAppearance.Primary" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_primary</item>
+        <item name="android:textColor">?attr/tcPrimary</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.Secondary" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_secondary</item>
+        <item name="android:textColor">?attr/tcSecondary</item>
+    </style>
+
+    <style name="Otaku.TextAppearance.Small" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">?attr/tcSecondary</item>
+    </style>
+</resources>

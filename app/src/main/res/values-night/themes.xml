@@ -1,0 +1,21 @@
+<resources>
+
+    <style name="Otaku.Theme.Dark" parent="Theme.AppCompat">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="tcPrimary">@color/textColorPrimary</item>
+        <item name="tcSecondary">@color/textColorSecondary</item>
+    </style>
+
+    <style name="Otaku.Theme.Dark.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Otaku.Theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Otaku.Theme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>
