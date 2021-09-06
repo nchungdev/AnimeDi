@@ -13,8 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/Otaku.Theme">
         <activity
+            android:name=".ui.activity.SplashActivity"
+            android:theme="@style/Otaku.Theme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:theme="@style/Otaku.Theme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.AnimeActivity"
+            android:theme="@style/Otaku.Theme.TransparentStatusBar" />
+        <activity
+            android:name=".ui.activity.MangaActivity"
+            android:theme="@style/Otaku.Theme.TransparentStatusBar" />
+        <activity
             android:name=".ui.activity.MainActivity"
-            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Otaku.Theme.NoActionBar">
             <intent-filter>

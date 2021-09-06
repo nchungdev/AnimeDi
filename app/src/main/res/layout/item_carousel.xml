@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:cardBackgroundColor="?attr/colorBackground"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="@dimen/cardview_default_elevation">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.chun.anime.ui.widget.RatioImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:ratio="@string/carousel_ratio" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_overlay"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_pretty_small">
+
+        <com.chun.anime.ui.widget.TextDescView
+            android:id="@+id/tvDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/spacing_small"
+            android:paddingBottom="@dimen/spacing_small"
+            app:desc="Tap 100"
+            app:descTextAppearance="@style/Otaku.TextAppearance.TextDescView.Desc"
+            app:title="Ten Anime"
+            app:titleTextAppearance="@style/Otaku.TextAppearance.TextDescView.Title" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRead"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_button_rounded"
+            android:text="Read More"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_primary" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

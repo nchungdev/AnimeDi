@@ -1,13 +1,34 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Otaku.Theme" parent="Theme.AppCompat">
+    <style name="Otaku.Theme" parent="Theme.AppCompat.Light">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <!-- Secondary brand color. -->
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="tcPrimary">@color/textColorPrimary</item>
-        <item name="tcSecondary">@color/textColorSecondary</item>
+        <item name="colorBackgroundBold">@color/bgBold</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
+        <item name="android:windowContentTransitions">true</item>
+
+        <!--text colors-->
+        <item name="tcPrimary">@color/textPrimary</item>
+        <item name="tcPrimaryDisable">@color/textPrimaryDisable</item>
+        <item name="tcSecondary">@color/textSecondary</item>
+        <item name="tcPrimaryBlackOverlay">@color/textPrimaryBlackOverlay</item>
+        <item name="tcSecondaryBlackOverlay">@color/textSecondaryBlackOverlay</item>
+
+        <!--background, selector-->
+        <item name="colorBackground">@color/colorBackground</item>
+        <item name="bgBottomNavigation">@color/bgBottomNavigation</item>
+        <item name="selectorBottomNavigation">@drawable/selector_bottom_navigation</item>
+        <item name="colorDivider">@color/colorDivider</item>
+        <item name="colorBackgroundItem">@color/colorBgItem</item>
+
+        <!--other colors-->
+        <item name="colorDrawableTint">@color/colorDrawableTint</item>
     </style>
 
     <style name="Otaku.Theme.NoActionBar">
@@ -15,7 +36,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Otaku.Theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Otaku.Theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
 
     <style name="Otaku.Theme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Otaku.Theme.TransparentStatusBar" parent="Otaku.Theme.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
 </resources>

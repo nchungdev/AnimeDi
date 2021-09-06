@@ -16,5 +16,5 @@ abstract class FlowUseCase<in P, R>(private val coroutineDispatcher: CoroutineDi
         .catch { e -> emit(Resource.Error(Exception(e))) }
         .flowOn(coroutineDispatcher)
 
-    protected abstract fun execute(parameters: P): Flow<Resource<R>>
+    protected abstract fun execute(params: P): Flow<Resource<R>>
 }

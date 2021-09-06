@@ -3,7 +3,6 @@ package com.chun.anime.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.chun.anime.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -11,14 +10,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
-    private val _navigationItemSelected = MutableLiveData<Int>()
-    val navigationItemSelected: LiveData<Int> = _navigationItemSelected
+    private val _toggleSearchScreen = MutableLiveData<Boolean>()
+    val toggleSearchScreen: LiveData<Boolean> get() = _toggleSearchScreen
 
-    init {
-        _navigationItemSelected.value = R.id.navigation_home
-    }
-
-    fun navigate(id: Int) {
-        _navigationItemSelected.value = id
-    }
+    fun toggleSearchScreen(visible: Boolean) = _toggleSearchScreen.postValue(visible)
 }

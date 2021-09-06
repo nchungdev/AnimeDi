@@ -2,16 +2,26 @@ package com.chun.data.di
 
 import android.content.Context
 import com.chun.data.BuildConfig
-import com.chun.data.remote.RestApi
-import com.chun.data.repo.RestRepositoryImpl
-import com.chun.data.typeadapter.AnimeTypeAdapter
-import com.chun.data.typeadapter.BaseObjectTypeAdapter
-import com.chun.domain.model.Anime
-import com.chun.domain.model.BaseObj
-import com.chun.domain.repository.RestRepository
+import com.chun.data.cache.CacheProviderImpl
+import com.chun.data.cache.FileCacheHelper
+import com.chun.data.mapper.DataMapper
+import com.chun.data.remote.service.AnimeService
+import com.chun.data.remote.service.HomeService
+import com.chun.data.remote.service.SearchService
+import com.chun.data.remote.typeadapter.*
+import com.chun.data.repo.AnimeRepositoryImpl
+import com.chun.data.repo.FirestoreRepositoryImpl
+import com.chun.data.repo.HomeRepositoryImpl
+import com.chun.data.repo.SearchRepositoryImpl
+import com.chun.domain.model.*
+import com.chun.domain.repository.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.firestoreSettings
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,25 +63,86 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
+    fun provideRetrofit(
+        @ApplicationContext context: Context,
+        gson: Gson,
+        okHttpClient: OkHttpClient,
+        baseUrl: String
+    ): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .addCallAdapterFactory(ErrorHandlingCallAdapterFactory(context))
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .build()
 
     @Provides
     @Singleton
-    fun provideRestRepository(retrofit: Retrofit): RestRepository =
-        RestRepositoryImpl(retrofit.create(RestApi::class.java))
+    fun provideFileCache(@ApplicationContext context: Context): FileCacheHelper = FileCacheHelper(context, AppInfo())
 
+
+    //
+//    @Provides
+//    @Singleton
+//    fun provideAppDatabase(@ApplicationContext context: Context) =
+//        Room.databaseBuilder(context, AppDatabase::class.java, "com.chun.animedi")
+//            .build()
+//
+//    @Provides
+//    fun provideOtakuDao(appDatabase: AppDatabase): OtakuDao = appDatabase.otakuDao()
+//
+//    @Provides
+//    fun provideHomeDao(appDatabase: AppDatabase): HomeDao = appDatabase.homeDao()
+//
     @Provides
     @Singleton
     fun provideGson(): Gson = GsonBuilder()
-        .registerTypeAdapter(BaseObj::class.java, BaseObjectTypeAdapter())
+        .registerTypeAdapter(Simple::class.java, SimpleTypeAdapter())
+        .registerTypeAdapter(Otaku::class.java, OtakuTypeAdapter())
+        .registerTypeAdapter(Aired::class.java, AiredTypeAdapter())
+        .registerTypeAdapter(Prop::class.java, PropTypeAdapter())
+        .registerTypeAdapter(Related::class.java, RelatedTypeAdapter())
+        .registerTypeAdapter(Timestamp::class.java, TimestampTypeAdapter())
+
         .registerTypeAdapter(Anime::class.java, AnimeTypeAdapter())
+        .registerTypeAdapter(Manga::class.java, MangaTypeAdapter())
         .create()
+
+    @Provides
+    @Singleton
+    fun provideCacheProvider(fileCacheHelper: FileCacheHelper): CacheProvider = CacheProviderImpl(fileCacheHelper)
+
+    @Provides
+    @Singleton
+    fun provideDataMapper(): DataMapper = DataMapper()
+
+    @Provides
+    fun provideFirestore(): FirebaseFirestore = Firebase.firestore.apply {
+        firestoreSettings = firestoreSettings {
+            isPersistenceEnabled = true
+            cacheSizeBytes = FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseRepository(firestore: FirebaseFirestore, dataMapper: DataMapper): FirestoreRepository =
+        FirestoreRepositoryImpl(firestore, dataMapper)
+
+    @Provides
+    @Singleton
+    fun provideRestRepository(retrofit: Retrofit, cacheProvider: CacheProvider): HomeRepository =
+        HomeRepositoryImpl(retrofit.create(HomeService::class.java), cacheProvider)
+
+    @Provides
+    @Singleton
+    fun provideSearchRepository(retrofit: Retrofit): SearchRepository =
+        SearchRepositoryImpl(retrofit.create(SearchService::class.java))
+
+    @Provides
+    @Singleton
+    fun provideAnimeRepository(retrofit: Retrofit): AnimeRepository =
+        AnimeRepositoryImpl(retrofit.create(AnimeService::class.java))
 
     class CacheControlInterceptor(context: Context) : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {

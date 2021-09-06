@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--text colors-->
     <attr name="tcPrimary" />
+    <attr name="tcPrimaryDisable" />
     <attr name="tcSecondary" />
+    <attr name="tcPrimaryBlackOverlay" />
+    <attr name="tcSecondaryBlackOverlay" />
+
+    <!--background, selector colors-->
+    <attr name="colorBackground" />
+    <attr name="colorBackgroundBold" />
+    <attr name="colorBackgroundItem" />
+    <attr name="bgBottomNavigation" />
+    <attr name="selectorBottomNavigation" />
+    <attr name="colorDivider" />
+
+    <!--tint colors-->
+    <attr name="colorDrawableTint" />
 </resources>
