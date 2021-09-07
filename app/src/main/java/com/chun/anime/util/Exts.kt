@@ -11,3 +11,7 @@ fun MultiLang.get(context: Context): String {
         else -> en
     }
 }
+
+fun <T> Int.isValidPosition(collection: ArrayList<T>?): Boolean {
+    return !collection.isNullOrEmpty() && this >= 0 && this < collection.size
+}

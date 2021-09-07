@@ -81,13 +81,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     hideLoading()
                     val context = context ?: return@observe
                     if (adapter == null) {
-                        adapter = HomeAdapter(context, Glide.with(this), arrayListOf(), Config(spacing = spacing)).apply {
-                            onClick = { view ->
+                        adapter =
+                            HomeAdapter(context, Glide.with(this), arrayListOf(), Config(spacing = spacing)) { view ->
                                 (view.tag as? Otaku)?.let {
                                     requireActivity().openInfo(view, it)
                                 }
                             }
-                        }
                         recyclerView.adapter = adapter
                     }
                     adapter?.update(it.data)

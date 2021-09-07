@@ -1,18 +1,19 @@
 package com.chun.domain.model
 
 import android.os.Parcelable
+import com.chun.domain.model.type.ObjType
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class Otaku(
-    var id: Int = 0,
-    var type: String = "",
+open class Otaku(
+    open var id: Int = 0,
+    open var type: String = "",
     var name: String = "",
-    var url: String = "",
-    var imageUrl: String = "",
-    var score: Double = 0.0,
-    var objType: String = "",
-    var genres: List<Simple> = emptyList(),
+    open var url: String = "",
+    open var imageUrl: String = "",
+    open var score: Double = 0.0,
+    @ObjType var objType: String = ObjType.UNKNOWN,
+    open var genres: List<Simple> = emptyList(),
 ) : Parcelable {
 
     fun toAnime(): Anime {

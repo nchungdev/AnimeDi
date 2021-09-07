@@ -13,11 +13,14 @@ sealed class Resource<out R> {
 
     object Loading : Resource<Nothing>()
 
+    object NotLoading : Resource<Nothing>()
+
     override fun toString(): String {
         return when (this) {
             is Success<*> -> "Success[data=$data]"
             is Error -> "Error[exception=$exception]"
             Loading -> "Loading"
+            NotLoading -> "NotLoading"
         }
     }
 }

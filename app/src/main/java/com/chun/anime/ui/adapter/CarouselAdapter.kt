@@ -1,6 +1,8 @@
 package com.chun.anime.ui.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
 import com.chun.anime.databinding.ItemCarouselBinding
@@ -9,10 +11,15 @@ import com.chun.anime.ui.base.rv.ViewHolder
 import com.chun.anime.util.glide.loadThumbnail
 import com.chun.domain.model.Otaku
 
-class CarouselAdapter(context: Context, private val requestManager: RequestManager, data: ArrayList<Otaku>) :
-    RvAdapter<Otaku, ItemCarouselBinding>(context, data) {
+class CarouselAdapter(
+    context: Context,
+    private val requestManager: RequestManager,
+    data: ArrayList<Otaku>,
+    onClick: (View) -> Unit
+) :
+    RvAdapter<Otaku, ItemCarouselBinding>(context, data, onClick = onClick) {
 
-    override fun provideViewBinding(parent: ViewGroup, viewType: Int) =
+    override fun provideViewBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int) =
         ItemCarouselBinding.inflate(inflater, parent, false)
 
     override fun updateViewHolder(holder: ViewHolder<ItemCarouselBinding>, position: Int) {

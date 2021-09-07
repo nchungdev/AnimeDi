@@ -7,12 +7,10 @@ import com.chun.data.cache.FileCacheHelper
 import com.chun.data.mapper.DataMapper
 import com.chun.data.remote.service.AnimeService
 import com.chun.data.remote.service.HomeService
+import com.chun.data.remote.service.MangaService
 import com.chun.data.remote.service.SearchService
 import com.chun.data.remote.typeadapter.*
-import com.chun.data.repo.AnimeRepositoryImpl
-import com.chun.data.repo.FirestoreRepositoryImpl
-import com.chun.data.repo.HomeRepositoryImpl
-import com.chun.data.repo.SearchRepositoryImpl
+import com.chun.data.repo.*
 import com.chun.domain.model.*
 import com.chun.domain.repository.*
 import com.google.firebase.firestore.FirebaseFirestore
@@ -131,7 +129,7 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideRestRepository(retrofit: Retrofit, cacheProvider: CacheProvider): HomeRepository =
+    fun provideHomeRepository(retrofit: Retrofit, cacheProvider: CacheProvider): HomeRepository =
         HomeRepositoryImpl(retrofit.create(HomeService::class.java), cacheProvider)
 
     @Provides
@@ -143,6 +141,11 @@ object DataModule {
     @Singleton
     fun provideAnimeRepository(retrofit: Retrofit): AnimeRepository =
         AnimeRepositoryImpl(retrofit.create(AnimeService::class.java))
+
+    @Provides
+    @Singleton
+    fun provideMangaRepository(retrofit: Retrofit): MangaRepository =
+        MangaRepositoryImpl(retrofit.create(MangaService::class.java))
 
     class CacheControlInterceptor(context: Context) : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {

@@ -14,16 +14,21 @@ open class BaseSpacingItemDecoration(context: Context) : RecyclerView.ItemDecora
     protected val spacingLarge = context.resources.getDimensionPixelSize(R.dimen.spacing_pretty_large)
 
     protected fun setGridSpacing(outRect: Rect, spacing: Int, position: Int, spanCount: Int) {
-        val column = position % spanCount
-        outRect.left = spacing - column * spacing / spanCount
-        outRect.right = (column + 1) * spacing / spanCount
+        val spanIndex = position % spanCount
+        outRect.left = spacing - spanIndex * spacing / spanCount
+        outRect.right = (spanIndex + 1) * spacing / spanCount
         if (position < spanCount) {
             outRect.top = spacing
         }
         outRect.bottom = spacing
     }
 
-    protected fun setGridSpacing(outRect: Rect, itemPosition: Int, columnCount: Int) {
-        setGridSpacing(outRect, spacing, itemPosition, columnCount)
+    protected fun setGridSpacing(outRect: Rect, itemPosition: Int, spanCount: Int) {
+        setGridSpacing(outRect, spacing, itemPosition, spanCount)
+    }
+
+    protected fun setTopBottomSpacing(outRect: Rect, spacing: Int) {
+        outRect.top = spacing
+        outRect.bottom = spacing
     }
 }

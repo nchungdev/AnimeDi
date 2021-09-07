@@ -1,6 +1,8 @@
 package com.chun.anime.ui.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.bumptech.glide.RequestManager
@@ -12,10 +14,16 @@ import com.chun.anime.util.glide.SimpleRequestListener
 import com.chun.anime.util.glide.loadThumbnail
 import com.chun.domain.model.Otaku
 
-class PortraitAdapter(context: Context, private val requestManager: RequestManager, data: ArrayList<Otaku>, config: Config) :
-    RvAdapter<Otaku, ItemPortraitBinding>(context, data, config) {
+class PortraitAdapter(
+    context: Context,
+    private val requestManager: RequestManager,
+    data: ArrayList<Otaku>,
+    config: Config,
+    onClick: (View) -> Unit
+) :
+    RvAdapter<Otaku, ItemPortraitBinding>(context, data, config, onClick) {
 
-    override fun provideViewBinding(parent: ViewGroup, viewType: Int) =
+    override fun provideViewBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int) =
         ItemPortraitBinding.inflate(inflater, parent, false).apply {
             thumbnail.layoutParams.width = config.width
             thumbnail.layoutParams.height = config.height

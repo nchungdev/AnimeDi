@@ -1,22 +1,30 @@
 package com.chun.domain.param
 
-import com.chun.domain.model.type.Type
+import com.chun.domain.model.type.ObjType
 
-class SearchParams {
-    var type: String = Type.ANIME
-    var keyword: String = ""
+
+data class SearchParams(
+    @ObjType val objType: String = ObjType.UNKNOWN,
+    private val query: String = "",
+    private val type: String = "",
+    private val status: String = "",
+    private val rated: String = "",
+    private val genre: String = "",
+    private val otherBy: String = "",
+    private val sort: String = ""
+) {
+
     var page: Int = 1
-    var orderBy: String = ""
 
-    fun toMap() = HashMap<String, String>().apply {
-        put("q", keyword)
-        put("page", page.toString())
-        if (orderBy.isNotEmpty()) {
-            put("orderBy", orderBy)
-        }
-    }
-
-    companion object {
-        val EMPTY = SearchParams()
-    }
+    fun toQueryMap() = mapOf(
+        "q" to query,
+        "page" to page.toString(),
+        "type" to type,
+        "status" to status,
+        "rated" to rated,
+        "genre" to genre,
+        "otherBy" to otherBy,
+        "sort" to sort,
+    )
+        .filterNot { it.value.isEmpty() }
 }

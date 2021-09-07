@@ -32,7 +32,4 @@ dependencies {
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt'
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt'
     implementation 'javax.inject:javax.inject:1'
-    api 'androidx.paging:paging-common-ktx:3.0.1'
-    api "androidx.paging:paging-runtime-ktx:3.0.1"
-
 }
