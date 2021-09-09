@@ -43,10 +43,12 @@
         <entry key="app/src/main/res/layout/item_landscape.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/item_load_more.xml" value="0.1234375" />
         <entry key="app/src/main/res/layout/item_loading.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/item_loading_more.xml" value="0.19746376811594202" />
         <entry key="app/src/main/res/layout/item_manga.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/layout/item_network_state.xml" value="0.20052083333333334" />
         <entry key="app/src/main/res/layout/item_portrait.xml" value="0.12337569142400528" />
         <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.20260416666666667" />
+        <entry key="app/src/main/res/layout/item_retry.xml" value="0.19746376811594202" />
         <entry key="app/src/main/res/layout/item_viewpager.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/layout_error.xml" value="1.0657517281357731" />
         <entry key="app/src/main/res/layout/loading.xml" value="0.20260416666666667" />

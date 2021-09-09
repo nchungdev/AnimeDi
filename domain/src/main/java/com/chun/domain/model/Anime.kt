@@ -1,10 +1,12 @@
 package com.chun.domain.model
 
+import com.chun.domain.model.type.ObjType
+
 data class Anime(
-    var id: Int = 0,
-    var type: String = "",
-    var url: String = "",
-    var imageUrl: String = "",
+    override var id: Int = 0,
+    override var type: String = "",
+    override var url: String = "",
+    override var imageUrl: String = "",
     var trailerUrl: String = "",
     var title: String = "",
     var titleEn: String = "",
@@ -19,7 +21,7 @@ data class Anime(
     var duration: String = "",
     var episodes: Int = 0,
     var favorites: Int = 0,
-    var genres: List<Simple> = emptyList(),
+    override var genres: List<Simple> = emptyList(),
     var licensors: List<Simple> = emptyList(),
     var members: Int = 0,
     var popularity: Int = 0,
@@ -28,10 +30,10 @@ data class Anime(
     var rank: Int = 0,
     var rating: String = "",
     var related: Related = Related(),
-    var score: Double = 0.0,
+    override var score: Double = 0.0,
     var scoredBy: Int = 0,
     var studios: List<Simple> = emptyList(),
     var synopsis: String = "",
     var openingThemes: List<String> = emptyList(),
-    var endingThemes: List<String> = emptyList()
-)
+    var endingThemes: List<String> = emptyList(),
+) : Otaku(id, type, title, url, imageUrl, score, ObjType.ANIME, genres)

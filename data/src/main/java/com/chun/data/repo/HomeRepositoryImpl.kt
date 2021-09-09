@@ -1,15 +1,11 @@
 package com.chun.data.repo
 
-import com.chun.data.model.RestListResult
+import com.chun.data.model.ListResult
 import com.chun.data.remote.service.HomeService
 import com.chun.data.util.NetworkBoundResource
-import com.chun.domain.model.Home
-import com.chun.domain.model.Layout
-import com.chun.domain.model.Otaku
-import com.chun.domain.model.Season
+import com.chun.domain.model.*
 import com.chun.domain.repository.CacheProvider
 import com.chun.domain.repository.HomeRepository
-import timber.log.Timber
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
@@ -21,20 +17,19 @@ class HomeRepositoryImpl @Inject constructor(
         localFetch = { cacheProvider.getHomes() },
         remoteFetch = {
             layouts.map { layout ->
-                val dataType = layout.dataType
-                when (dataType.reference) {
-                    "top" -> process(layout, homeService.fetchTop(dataType.type, 1, dataType.subtype))
-                    else -> Home.EMPTY
-                }
+                layout.request
+                    .takeIf { it != Request.DEFAULT_REQUEST }
+                    ?.let { process(layout, homeService.fetchTop(it.path, it.query)) }
+                    ?: Home.EMPTY
             }
         },
         storeRemoteResult = { cacheProvider.saveHomes(it) }
     )
 
-    private fun process(layout: Layout, otakuList: RestListResult<Otaku>): Home {
+    private fun process(layout: Layout, otakuList: ListResult<Otaku>): Home {
         return if (otakuList.data == null) Home.EMPTY
         else {
-            otakuList.data?.forEach { it.type = layout.dataType.type }
+            otakuList.data?.forEach { it.type = layout.type }
             Home(layout.title, layout.subtitle, otakuList.data!!, layout.display)
         }
     }

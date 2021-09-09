@@ -8,7 +8,7 @@ class Config(
     var width: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
     val spacing: Int = 0,
     val roundedItem: Boolean = true,
-    val columnCount: Int = 1,
+    val spanCount: Int = 1,
 ) {
     init {
         if (ratio > 0) {

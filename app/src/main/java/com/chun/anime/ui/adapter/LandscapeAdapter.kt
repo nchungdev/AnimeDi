@@ -1,6 +1,8 @@
 package com.chun.anime.ui.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
 import com.chun.anime.databinding.ItemLandscapeBinding
@@ -17,10 +19,11 @@ class LandscapeAdapter(
     context: Context,
     private val requestManager: RequestManager,
     data: ArrayList<Otaku>,
-    config: Config
+    config: Config,
+    onClick: (View) -> Unit
 ) :
-    RvAdapter<Otaku, ItemLandscapeBinding>(context, data, config) {
-    override fun provideViewBinding(parent: ViewGroup, viewType: Int) =
+    RvAdapter<Otaku, ItemLandscapeBinding>(context, data, config, onClick) {
+    override fun provideViewBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int) =
         ItemLandscapeBinding.inflate(inflater, parent, false).apply {
             root.layoutParams.width = config.width
             root.layoutParams.height = config.height

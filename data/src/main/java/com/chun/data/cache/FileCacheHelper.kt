@@ -67,7 +67,7 @@ class FileCacheHelper @Inject constructor(private val appContext: Context, priva
         }
     }
 
-    private operator fun get(file: File): String? {
+    private fun get(file: File): String? {
         var br: BufferedReader? = null
         try {
             br = BufferedReader(InputStreamReader(FileInputStream(file)))

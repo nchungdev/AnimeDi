@@ -1,12 +1,48 @@
 package com.chun.anime.ui.activity
 
-import com.chun.anime.ui.base.activity.SimpleActivity
-import com.chun.anime.ui.fragment.HomeFragment
+import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.chun.anime.R
+import com.chun.anime.databinding.ActivityMainBinding
+import com.chun.anime.ui.base.activity.BaseActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : SimpleActivity() {
-    override fun provideFragment() = HomeFragment()
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    override fun provideViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        ActivityMainBinding.inflate(inflater, container, false)
+
+    override fun setupViews(savedInstanceState: Bundle?) {
+        setSupportActionBar(binding.toolbar)
+    }
+
+    override fun handleEvent(savedInstanceState: Bundle?) {
+        val navView: BottomNavigationView = binding.navView
+
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_upcoming, R.id.navigation_mylist
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+
+        binding.searchView.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SearchActivity::class.java))
+        }
+
+    }
 
     override fun onBackPressed() {
         moveTaskToBack(true)

@@ -1,92 +1,93 @@
 package com.chun.anime.viewmodel
 
-import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.chun.anime.util.UiAction
-import com.chun.anime.util.UiState
-import com.chun.domain.param.SearchParams
+import com.chun.domain.Resource
+import com.chun.domain.model.Otaku
+import com.chun.domain.model.type.ObjType
 import com.chun.domain.usecase.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchResultViewModel @Inject constructor(
-    private val searchUseCase: SearchUseCase,
-    private val savedStateHandle: SavedStateHandle
-) : ViewModel() {
+class SearchResultViewModel @Inject constructor(private val searchUseCase: SearchUseCase) : ViewModel() {
+    private var currentType: String = ObjType.UNKNOWN
 
-    /**
-     * Stream of immutable states representative of the UI.
-     */
-    val state: StateFlow<UiState>
-
-    /**
-     * Processor of side effects from the UI which in turn feedback into [state]
-     */
     val accept: (UiAction) -> Unit
 
+    val state: LiveData<UiState>
+
     init {
-        val initialQuery: SearchParams = savedStateHandle.get(LAST_SEARCH_QUERY) ?: SearchParams.EMPTY
-        val lastQueryScrolled: SearchParams = savedStateHandle.get(LAST_QUERY_SCROLLED) ?: SearchParams.EMPTY
-        val actionStateFlow = MutableSharedFlow<UiAction>()
+        val actionStateFlow = MutableSharedFlow<Query>()
+
         val searches = actionStateFlow
-            .filterIsInstance<UiAction.Search>()
+            .filterNot { it.keyword.isEmpty() }
             .distinctUntilChanged()
             .debounce(300)
-            .onStart { emit(UiAction.Search(query = initialQuery)) }
-        val queriesScrolled = actionStateFlow
-            .filterIsInstance<UiAction.Scroll>()
-            .distinctUntilChanged()
-            // This is shared to keep the flow "hot" while caching the last query scrolled,
-            // otherwise each flatMapLatest invocation would lose the last query scrolled,
-            .shareIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
-                replay = 1
-            )
-            .onStart {
-                emit(UiAction.Scroll(currentQuery = lastQueryScrolled))
-            }
+            .flatMapLatest { load(it) }
+            .onStart { emit(UiState()) }
 
-        state = searches
-            .flatMapLatest { search ->
-                combine(
-                    queriesScrolled,
-                    searchUseCase(SearchParams().apply {
-                        type = search.query.type
-                        keyword = search.query.keyword
-                    }),
-                    ::Pair
-                )
-                    // Each unique PagingData should be submitted once, take the latest from
-                    // queriesScrolled
-                    .distinctUntilChangedBy { it.second }
-                    .map { (scroll, pagingData) ->
-                        UiState(
-                            query = search.query,
-                            pagingData = pagingData,
-                            // If the search query matches the scroll query, the user has scrolled
-                            hasNotScrolledForCurrentSearch = search.query != scroll.currentQuery
-                        )
-                    }
-            }
-            .stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
-                initialValue = UiState()
-            )
+        state = searches.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
+            initialValue = UiState()
+        )
+            .asLiveData()
 
         accept = { action ->
-            viewModelScope.launch { actionStateFlow.emit(action) }
+            viewModelScope.launch {
+                when (action) {
+                    is UiAction.Typing -> {
+                        //request
+                        actionStateFlow.emit(Query.Changed(action.keyword))
+                    }
+                    is UiAction.Retry -> {
+                        // retry
+                        actionStateFlow.emit(Query.Changed(state.value?.currentQuery?.keyword ?: return@launch))
+                    }
+                    is UiAction.LoadMore -> {
+                        val uiState = state.value ?: return@launch
+                        val currentQuery = uiState.currentQuery.keyword
+                        val nextPage = uiState.currentQuery.page
+                        actionStateFlow.emit(Query.LoadMore(currentQuery, nextPage))
+                    }
+                    is UiAction.Filter -> Unit
+                }
+            }
         }
     }
 
-    companion object {
-        private const val LAST_SEARCH_QUERY: String = "LAST_SEARCH_QUERY"
-        private const val LAST_QUERY_SCROLLED: String = "LAST_QUERY_SCROLLED"
+    fun currentType(type: String) {
+        currentType = type
+    }
+
+    private fun load(query: Query) =
+        searchUseCase(SearchUseCase.Params(currentType, query.keyword, query.page)).map {
+            val nextPage = query.page + (if (it is Resource.Success) 1 else 0)
+            val isLoadMore = query is Query.LoadMore
+            UiState(Query.Initial(query.keyword, nextPage), it, if (isLoadMore) LoadState.APPEND else LoadState.REFRESH)
+        }
+
+    sealed class UiAction {
+        data class Typing(val keyword: String = "") : UiAction()
+        data class Filter(val rated: String) : UiAction()
+        object LoadMore : UiAction()
+        object Retry : UiAction()
+    }
+
+    data class UiState(
+        val currentQuery: Query = Query.Changed(""),
+        val data: Resource<List<Otaku>> = Resource.Loading,
+        val state: Int = LoadState.INITIAL
+    )
+
+    sealed class Query(val keyword: String, val page: Int) {
+        class Initial(keyword: String, page: Int) : Query(keyword, page)
+        class Changed(keyword: String) : Query(keyword, 1)
+        class LoadMore(keyword: String, page: Int) : Query(keyword, page)
     }
 }

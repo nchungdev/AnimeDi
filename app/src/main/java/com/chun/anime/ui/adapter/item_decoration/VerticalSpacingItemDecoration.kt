@@ -5,8 +5,8 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.chun.anime.ui.base.rv.BaseSpacingItemDecoration
-import com.chun.domain.model.type.Display
 import com.chun.anime.util.getTypeTag
+import com.chun.domain.model.type.ViewType
 
 class VerticalSpacingItemDecoration(context: Context) : BaseSpacingItemDecoration(context) {
 
@@ -24,7 +24,7 @@ class VerticalSpacingItemDecoration(context: Context) : BaseSpacingItemDecoratio
             outRect.bottom = spacing
         }
         when (view.getTypeTag()) {
-            Display.HEADER -> {
+            ViewType.HEADER -> {
                 outRect.top = spacingPrettySmall
                 outRect.bottom = spacingSmall
             }

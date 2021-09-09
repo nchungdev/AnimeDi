@@ -18,6 +18,7 @@ class SearchResultPagerFragment : BaseFragment<FragmentSearchAcBinding>() {
     override fun bindData(view: View, savedInstanceState: Bundle?) {
         val adapter = SearchAcFragmentAdapter(this)
         binding.viewPager.adapter = adapter
+        binding.viewPager.offscreenPageLimit = 4
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = adapter.getPageTitle(position)
         }.attach()
