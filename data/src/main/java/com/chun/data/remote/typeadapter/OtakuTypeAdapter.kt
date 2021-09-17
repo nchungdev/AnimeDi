@@ -16,7 +16,7 @@ class OtakuTypeAdapter(private val objType: String = "") : BaseTypeAdapter<Otaku
             "url" -> obj.url = reader.nextString()
             "image_url" -> obj.imageUrl = reader.nextString()
             "score" -> obj.score = reader.nextDouble()
-            "genres" -> obj.genres = parseArray(reader) { SimpleTypeAdapter().read(reader) }
+            "genres" -> obj.genres = parseArray(reader) { SimpleTypeAdapter().read(it) }
             else -> reader.skipValue()
         }
     }

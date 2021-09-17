@@ -16,8 +16,8 @@ class FirestoreRepositoryImpl @Inject constructor(
     FirestoreRepository {
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override suspend fun getHomeLayout(): List<Layout> {
-        val task = firebaseFirestore.collection("home_section")
+    override suspend fun getLayout(section: String): List<Layout> {
+        val task = firebaseFirestore.collection(section)
         return suspendCancellableCoroutine { continuation ->
             task.addSnapshotListener(MetadataChanges.INCLUDE) { querySnapshot, e ->
                 if (querySnapshot == null) {

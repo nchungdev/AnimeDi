@@ -31,6 +31,7 @@ abstract class BaseTypeAdapter<T> : TypeAdapter<T>() {
         while (`in`.hasNext()) {
             array.add(parse(`in`))
         }
+        `in`.endArray()
         return array
     }
 }

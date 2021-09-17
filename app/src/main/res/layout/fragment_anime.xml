@@ -1,64 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.fragment.HomeFragment">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true" />
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:fitsSystemWindows="true"
-        app:elevation="0dp">
+        android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <com.chun.anime.ui.widget.SmartFitCollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            app:contentScrim="@android:color/transparent"
+            app:contentScrim="@android:color/black"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:scrimAnimationDuration="200"
             app:statusBarScrim="@android:color/transparent"
             app:titleEnabled="false">
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/top"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true">
 
                 <com.chun.anime.ui.widget.RatioImageView
-                    android:id="@+id/img_cover"
-                    android:layout_width="180dp"
+                    android:id="@+id/img_bg"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginTop="100dp"
-                    android:transitionName="@string/transition_thumbnail"
+                    android:fitsSystemWindows="true"
+                    android:foreground="@drawable/bg_overlay_dark"
+                    app:ratio="4:5" />
+
+                <ImageButton
+                    android:id="@+id/btn_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="40dp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/selector_borderless"
+                    android:src="@drawable/ic_play_circle_filled_64"
+                    app:tint="@color/colorAccent" />
+
+                <com.chun.anime.ui.widget.RatioImageView
+                    android:id="@+id/thumbnail"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/tv_rated"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginBottom="@dimen/spacing_normal"
                     app:ratio="@string/portrait_ratio" />
 
-                <com.chun.anime.ui.widget.SmartTextView
-                    android:id="@+id/tvTitle"
-                    style="@style/Otaku.Widget.TextView.Header.Large"
+                <TextView
+                    android:id="@+id/tv_title"
+                    style="@style/Otaku.Widget.TextView.Header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_large" />
+                    android:layout_above="@id/tv_subtitle"
+                    android:layout_alignStart="@id/tv_subtitle"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_toEndOf="@id/thumbnail"
+                    android:padding="0dp" />
 
-                <com.chun.anime.ui.widget.SmartTextView
-                    android:id="@+id/tvDesc"
+                <TextView
+                    android:id="@+id/tv_subtitle"
+                    style="@style/Otaku.Widget.TextView.Subtitle.Inverse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="4" />
-            </LinearLayout>
+                    android:layout_alignBottom="@id/thumbnail"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_toEndOf="@id/thumbnail" />
+
+                <TextView
+                    android:id="@+id/tv_genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/img_bg"
+                    android:layout_alignBottom="@id/img_bg"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_marginBottom="@dimen/spacing_normal" />
+
+                <TextView
+                    android:id="@+id/tv_rated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@id/img_bg"
+                    android:layout_alignBottom="@id/img_bg"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_marginBottom="@dimen/spacing_normal" />
+
+                <TextView
+                    android:id="@+id/tv_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/img_bg"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    android:layout_toEndOf="@id/tv_genres" />
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -68,11 +119,19 @@
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_arrow_back_24" />
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.chun.anime.ui.widget.SmartFitCollapsingToolbarLayout>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#000000"
+            app:tabMode="scrollable" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include
-        android:id="@+id/content"
-        layout="@layout/recyclerview_layout" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.chun.anime.ui.widget.RatioImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_rounded"
+        android:scaleType="centerCrop"
+        android:transitionName="@string/transition_thumbnail"
+        app:ratio="1:1"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvScore"
+        style="@style/Otaku.Widget.TextView.Subtitle.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/thumbnail"
+        android:layout_alignTop="@id/tvType"
+        android:layout_alignBottom="@id/tvType"
+        android:layout_marginStart="@dimen/spacing_small" />
+
+    <TextView
+        android:id="@+id/tvType"
+        style="@style/Otaku.Widget.TextView.Subtitle.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tvTitle"
+        android:layout_alignEnd="@id/thumbnail"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/bg_bagde"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/Otaku.Widget.TextView.Title.Inverse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/thumbnail"
+        android:layout_alignEnd="@id/thumbnail"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/spacing_tiny"
+        android:ellipsize="end"
+        android:maxLines="2" />
+</RelativeLayout>

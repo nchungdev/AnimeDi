@@ -8,7 +8,7 @@
 
     <com.chun.anime.ui.widget.SmartTextView
         android:id="@+id/tvTitle"
-        style="@style/Otaku.TextAppearance.Primary.Header.Large"
+        style="@style/Otaku.TextAppearance.Primary.Header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Otaku.Theme" parent="Theme.AppCompat.Light">
         <!-- Primary brand color. -->
@@ -8,7 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorBackgroundBold">@color/bgBold</item>
 
+        <item name="android:actionModeCloseDrawable">@drawable/ic_arrow_back_24</item>
+        <item name="actionModeCloseButtonStyle">@style/Otaku.Widget.ActionButton.Close</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:navigationBarColor">@color/colorBackground</item>
         <item name="android:windowContentTransitions">true</item>
@@ -26,6 +29,7 @@
         <item name="selectorBottomNavigation">@drawable/selector_bottom_navigation</item>
         <item name="colorDivider">@color/colorDivider</item>
         <item name="colorBackgroundItem">@color/colorBgItem</item>
+        <item name="colorRipple">@color/colorRipple</item>
 
         <!--other colors-->
         <item name="colorDrawableTint">@color/colorDrawableTint</item>

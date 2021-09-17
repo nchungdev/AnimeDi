@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
 import com.chun.anime.databinding.ItemCarouselBinding
-import com.chun.anime.ui.base.rv.RvAdapter
-import com.chun.anime.ui.base.rv.ViewHolder
+import com.chun.anime.ui.base.adapter.RvAdapter
+import com.chun.anime.ui.base.adapter.ViewHolder
 import com.chun.anime.util.glide.loadThumbnail
 import com.chun.domain.model.Otaku
 

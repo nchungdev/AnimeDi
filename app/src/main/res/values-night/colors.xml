@@ -19,6 +19,7 @@
     <color name="bgBottomNavigation">#F20C0C0C</color>
     <color name="colorBgItem">#80000000</color>
     <color name="colorDivider">#8E8D92</color>
+    <color name="colorRipple">#30AAAAAA</color>
     <color name="bgBold">#0f0f17</color>
 
     <!--tint colors-->

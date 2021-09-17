@@ -13,5 +13,6 @@ annotation class ViewType {
         const val UNIDENTIFIED = Int.MIN_VALUE
         const val HOZ_ITEM_LIST = 4
         const val LOAD_MORE = 5
+        const val SQUARE = 6
     }
 }

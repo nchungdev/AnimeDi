@@ -6,7 +6,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AnimeActivity : SimpleActivity() {
-    override fun provideFragment() = AnimeFragment.newInstance(intent.getParcelableExtra(EXTRA_DATA)!!)
+    override fun provideFragment() = AnimeFragment.newInstance(intent?.getParcelableExtra(EXTRA_DATA)!!)
 
     companion object {
         const val EXTRA_DATA = "xData"

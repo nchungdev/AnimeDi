@@ -5,7 +5,7 @@ import com.chun.domain.model.Home
 import kotlinx.coroutines.flow.Flow
 
 interface CacheProvider {
-    fun saveHomes(homes: List<Home>)
+    fun save(type: String, homes: List<Home>)
 
-    fun getHomes(): Flow<CacheVersion<List<Home>>?>
+    fun get(type: String): Flow<CacheVersion<List<Home>>?>
 }

@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="main_tabs">
-        <item>@string/all</item>
+    <string-array name="explore_titles">
+        <item>Top</item>
+        <item>Seasonal</item>
+        <item>Schedule</item>
+        <item>Producer</item>
+    </string-array>
+
+    <string-array name="search_tab_titles">
         <item>@string/anime</item>
         <item>@string/manga</item>
+        <item>@string/character</item>
+        <item>@string/people</item>
+    </string-array>
+
+    <string-array name="anime_tab_titles">
+        <item>About</item>
+        <item>Seasons</item>
+        <item>Characters</item>
+        <item>People</item>
+        <item>Reviews</item>
+        <item>Forum</item>
+        <item>Recommendations</item>
     </string-array>
 </resources>

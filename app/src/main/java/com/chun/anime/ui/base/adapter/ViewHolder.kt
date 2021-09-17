@@ -1,4 +1,4 @@
-package com.chun.anime.ui.base.rv
+package com.chun.anime.ui.base.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding

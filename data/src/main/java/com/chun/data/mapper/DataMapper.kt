@@ -32,7 +32,7 @@ class DataMapper {
         subtitle = doc.get("subtitle", MultiLang::class.java) ?: MultiLang(),
         display = doc.get("display", Display::class.java) ?: UNKNOWN_DISPLAY,
         request = doc.get("request", Request::class.java) ?: DEFAULT_REQUEST,
-        type = doc.getString("type") ?: ObjType.ANIME,
+        type = doc.getString("objType") ?: ObjType.ANIME,
     )
 //
 //    fun modelToDb(home: Home) = HomeEntity().apply {

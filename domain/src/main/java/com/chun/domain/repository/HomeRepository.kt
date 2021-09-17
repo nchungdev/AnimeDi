@@ -8,11 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
 
-    suspend fun getHome(layouts: List<Layout>): Flow<Resource<List<Home>>>
-
-    suspend fun fetchGenre()
+    suspend fun getHome(type: String, layouts: List<Layout>): Flow<Resource<List<Home>>>
 
     suspend fun fetchSeason(year: Int, season: String): Season
-
-    fun getTopCharacter()
 }

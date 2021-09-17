@@ -5,12 +5,19 @@ import android.util.TypedValue
 import com.chun.anime.R
 
 object UiUtil {
+    private const val LAST_PERCENTAGE_ITEM_WIDTH = 0.075f
+
     fun getDisplayWidth(context: Context) = context.resources.displayMetrics.widthPixels
 
     fun getDisplayHeight(context: Context) = context.resources.displayMetrics.heightPixels
 
-    fun calcHozItemWidth(context: Context, spacing: Int, columnCount: Int, percent: Float) =
-        ((getDisplayWidth(context) - spacing * (columnCount + 1)) / (columnCount + percent)).toInt()
+    fun calcHozItemWidth(context: Context, spacing: Int, columnCount: Int, percent: Float): Int {
+        val width = (getDisplayWidth(context) - spacing * (columnCount + 1)) / columnCount
+        return (width - (percent * width)).toInt()
+    }
+
+    fun calcHozItemWidth(context: Context, spacing: Int, columnCount: Int) =
+        calcHozItemWidth(context, spacing, columnCount, LAST_PERCENTAGE_ITEM_WIDTH)
 
     fun calcItemWidth(context: Context, spacing: Int, columnCount: Int) =
         (getDisplayWidth(context) - spacing * (columnCount + 1)) / columnCount

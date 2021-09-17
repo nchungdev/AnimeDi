@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    app:cardBackgroundColor="@color/colorBackground"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp">
+    android:orientation="vertical">
 
     <com.chun.anime.ui.widget.RatioImageView
         android:id="@+id/thumbnail"
@@ -19,12 +15,50 @@
         app:ratio="@string/portrait_ratio"
         tools:ignore="ContentDescription" />
 
+
     <com.chun.anime.ui.widget.SmartTextView
-        android:id="@+id/tvTitle"
-        style="@style/Otaku.TextAppearance.Primary.Header"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvTitleError"
+        style="@style/Otaku.Widget.TextView.Title.Inverse"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_alignStart="@id/thumbnail"
+        android:layout_alignTop="@id/thumbnail"
+        android:layout_alignEnd="@id/thumbnail"
+        android:layout_alignBottom="@id/thumbnail"
         android:gravity="center"
         android:padding="@dimen/spacing_small" />
-</androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvScore"
+        style="@style/Otaku.Widget.TextView.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/thumbnail"
+        android:layout_alignTop="@id/tvType"
+        android:layout_alignBottom="@id/tvType" />
+
+    <TextView
+        android:id="@+id/tvType"
+        style="@style/Otaku.Widget.TextView.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/thumbnail"
+        android:layout_alignEnd="@id/thumbnail"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@drawable/bg_bagde"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="1dp" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/Otaku.Widget.TextView.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvScore"
+        android:layout_alignStart="@id/thumbnail"
+        android:layout_alignEnd="@id/thumbnail"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:ellipsize="end"
+        android:maxLines="2" />
+</RelativeLayout>

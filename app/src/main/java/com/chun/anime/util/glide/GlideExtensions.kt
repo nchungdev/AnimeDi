@@ -27,6 +27,7 @@ private val roundedCornersTransformation by lazy {
 fun RequestManager.loadThumbnail(url: String, lightTheme: Boolean): RequestBuilder<Drawable> {
     val requestOption = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL)
         .placeholder(R.drawable.placeholder)
+        .error(ColorGenerator())
         .signature(ObjectKey("thumb.$url.$lightTheme"))
         .transform(MultiTransformation(CenterCrop(), roundedCornersTransformation))
     return load(url).apply(requestOption)
@@ -47,15 +48,14 @@ fun RequestManager.loadBlurBg(
     sampling: Int = 1
 ): RequestBuilder<Drawable> {
     val requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL)
+        .placeholder(ColorGenerator())
         .signature(ObjectKey("bg_blur.$url.$lightTheme"))
         .transform(MultiTransformation(CenterCrop(), BlurTransformation(radius, sampling)))
     return load(url).apply(requestOptions)
 }
 
 fun RequestManager.loadBg(url: String): RequestBuilder<Drawable> {
-    val requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL)
-        .signature(ObjectKey("bg.$url"))
-        .transform(MultiTransformation(CenterCrop(), BlurOverlayTransformation(R.drawable.overlay_home_background)))
+    val requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL).transform(CenterCrop())
     return load(url).apply(requestOptions)
 }
 

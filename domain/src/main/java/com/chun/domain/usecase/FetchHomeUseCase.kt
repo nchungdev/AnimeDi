@@ -18,8 +18,8 @@ class FetchHomeUseCase @Inject constructor(
     FlowUseCase<FetchHomeUseCase.Params, List<Home>>(ioDispatcher) {
 
     override fun execute(params: Params) = flow {
-        emitAll(homeRepository.getHome(firestoreRepository.getHomeLayout()))
+        emitAll(homeRepository.getHome(params.type, firestoreRepository.getLayout(params.type)))
     }
 
-    class Params
+    data class Params(val type: String)
 }

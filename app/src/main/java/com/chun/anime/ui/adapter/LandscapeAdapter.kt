@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
+import com.chun.anime.R
 import com.chun.anime.databinding.ItemLandscapeBinding
+import com.chun.anime.ui.base.adapter.RvAdapter
+import com.chun.anime.ui.base.adapter.ViewHolder
 import com.chun.anime.ui.base.rv.Config
-import com.chun.anime.ui.base.rv.RvAdapter
-import com.chun.anime.ui.base.rv.ViewHolder
-import com.chun.anime.util.glide.loadBlurBg
+import com.chun.anime.util.glide.loadBg
 import com.chun.anime.util.glide.loadThumbnail
 import com.chun.domain.model.Otaku
-import com.chun.domain.util.join
 import java.util.*
 
 class LandscapeAdapter(
@@ -33,10 +33,9 @@ class LandscapeAdapter(
         val otaku = getItem(position)
         holder.binding.apply {
             requestManager.loadThumbnail(otaku.imageUrl).into(thumbnail)
-            requestManager.loadBlurBg(otaku.imageUrl, isLightTheme, sampling = 15).into(imgBg)
+            requestManager.loadBg(otaku.imageUrl/*, isLightTheme, sampling = 15*/).into(imgBg)
             tvTitle.text = otaku.name
-            tvScore.text = "${otaku.score}"
-            tvGenres.text = otaku.genres.join()
+            tvScore.text = context.getString(R.string.score_format, otaku.score)
         }
     }
 }

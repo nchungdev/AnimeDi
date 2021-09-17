@@ -1,4 +1,4 @@
-package com.chun.anime.ui.base.rv
+package com.chun.anime.ui.base.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

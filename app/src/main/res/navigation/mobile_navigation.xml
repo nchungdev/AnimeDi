@@ -7,12 +7,20 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.chun.anime.ui.fragment.HomeFragment"
-        android:label="@string/title_home" />
+        android:label="@string/title_home">
+        <argument
+            android:name="type"
+            android:defaultValue="home_top_section" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_upcoming"
-        android:name="com.chun.anime.ui.fragment.UpcomingFragment"
-        android:label="@string/title_upcoming" />
+        android:name="com.chun.anime.ui.fragment.HomeFragment"
+        android:label="@string/title_upcoming">
+        <argument
+            android:name="type"
+            android:defaultValue="home_seasonal_section" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_mylist"

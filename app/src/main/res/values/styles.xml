@@ -56,6 +56,14 @@
     </style>
 
 
+    <style name="Otaku.Widget.ActionButton.Close" parent="Widget.AppCompat.Light.ActionButton.CloseMode">
+        <item name="android:hint">?attr/colorDrawableTint</item>
+    </style>
+
+    <style name="Otaku.Widget.ActionButton.Close.Dark" parent="Widget.AppCompat.ActionButton.CloseMode">
+        <item name="android:hint">?attr/colorDrawableTint</item>
+    </style>
+
     <style name="Otaku.Widget.TextView" parent="Otaku.TextAppearance" />
 
     <style name="Otaku.Widget.TextView.Header" parent="Otaku.TextAppearance.Primary.Header">
@@ -77,11 +85,24 @@
     </style>
 
     <style name="Otaku.Widget.TextView.Title" parent="Otaku.TextAppearance.Primary">
+        <item name="android:textSize">@dimen/text_primary</item>
         <item name="android:maxLines">2</item>
     </style>
 
     <style name="Otaku.Widget.TextView.Title.Inverse">
         <item name="android:textColor">?attr/tcPrimaryBlackOverlay</item>
+    </style>
+
+    <style name="Otaku.Widget.TextView.Subtitle" parent="Otaku.TextAppearance.Secondary">
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Otaku.Widget.TextView.Subtitle.Inverse">
+        <item name="android:textColor">?attr/tcPrimaryBlackOverlay</item>
+    </style>
+
+    <style name="Otaku.Widget.TextView.Toolbar" parent="Otaku.TextAppearance.Primary">
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Otaku.Widget.Button.Rounded" parent="Otaku.TextAppearance.Primary">

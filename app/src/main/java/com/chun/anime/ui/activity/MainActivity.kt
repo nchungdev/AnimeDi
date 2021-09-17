@@ -1,6 +1,5 @@
 package com.chun.anime.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         ActivityMainBinding.inflate(inflater, container, false)
 
     override fun setupViews(savedInstanceState: Bundle?) {
-        setSupportActionBar(binding.toolbar)
     }
 
     override fun handleEvent(savedInstanceState: Bundle?) {
@@ -37,11 +35,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        binding.searchView.setOnClickListener {
-            startActivity(Intent(this@MainActivity, SearchActivity::class.java))
-        }
-
     }
 
     override fun onBackPressed() {

@@ -30,9 +30,9 @@ class MangaTypeAdapter : BaseTypeAdapter<Manga>() {
             "synopsis" -> obj.synopsis = reader.nextString()
             "background" -> obj.background = reader.nextString()
             "related" -> obj.related = RelatedTypeAdapter().read(reader)
-            "genres" -> obj.genres = parseArray(reader) { SimpleTypeAdapter().read(reader) }
-            "authors" -> obj.authors = parseArray(reader) { SimpleTypeAdapter().read(reader) }
-            "serializations" -> obj.serializations = parseArray(reader) { SimpleTypeAdapter().read(reader) }
+            "genres" -> obj.genres = parseArray(reader) { SimpleTypeAdapter().read(it) }
+            "authors" -> obj.authors = parseArray(reader) { SimpleTypeAdapter().read(it) }
+            "serializations" -> obj.serializations = parseArray(reader) { SimpleTypeAdapter().read(it) }
             else -> reader.skipValue()
         }
     }

@@ -8,17 +8,19 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.signature.ObjectKey
+import com.chun.anime.R
 import com.chun.anime.databinding.FragmentAnimeBinding
 import com.chun.anime.ui.activity.AnimeActivity
+import com.chun.anime.ui.adapter.AnimeFragmentStateAdapter
 import com.chun.anime.ui.base.activity.BaseActivity
 import com.chun.anime.ui.base.fragment.BaseFragment
-import com.chun.anime.util.glide.loadBlurBg
 import com.chun.anime.util.glide.loadThumbnail
-import com.chun.anime.util.hide
-import com.chun.anime.util.show
+import com.chun.anime.util.openYoutubeLink
 import com.chun.anime.viewmodel.AnimeViewModel
 import com.chun.domain.Resource
 import com.chun.domain.model.Otaku
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,23 +36,34 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding>() {
     override fun setupViews(view: View, savedInstanceState: Bundle?) {
         (requireActivity() as BaseActivity<*>).setSupportActionBar(binding.toolbar)
         requestManager = Glide.with(this)
-        binding.imgBg.setOnApplyWindowInsetsListener { v, insets ->
+        binding.top.setOnApplyWindowInsetsListener { v, insets ->
             insets.replaceSystemWindowInsets(0, 0, 0, 0)
             return@setOnApplyWindowInsetsListener insets
         }
+
     }
 
     override fun bindData(view: View, savedInstanceState: Bundle?) {
         val otaku: Otaku = arguments?.getParcelable(AnimeActivity.EXTRA_DATA) ?: return
         viewModel.getInfo(otaku)
         requestManager
-            .loadThumbnail(otaku.imageUrl, isLightTheme)
-            .into(binding.imgCover)
-        requestManager
-            .loadBlurBg(otaku.imageUrl, isLightTheme)
+            .asBitmap()
+            .load(otaku.imageUrl)
+            .signature(ObjectKey("bg.${otaku.imageUrl}"))
+            .centerCrop()
             .into(binding.imgBg)
-        binding.tvTitle.text = otaku.name
+        requestManager
+            .loadThumbnail(otaku.imageUrl)
+            .into(binding.thumbnail)
 
+        binding.toolbar.title = ""
+        binding.tvTitle.text = otaku.name
+        binding.tvScore.text = getString(R.string.score_format, otaku.score)
+        val fragmentStateAdapter = AnimeFragmentStateAdapter(this)
+        binding.viewPager.adapter = fragmentStateAdapter
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = fragmentStateAdapter.getPageTitle(position)
+        }.attach()
         viewModel.animeInfo.observe(viewLifecycleOwner) {
             val resource = it ?: return@observe
             when (resource) {
@@ -60,11 +73,18 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding>() {
                     hideLoading()
                     hideError()
                     val anime = resource.data
-                    binding.tvDesc.text = anime.synopsis
+                    binding.tvGenres.text = anime.genres.toString()
+                    binding.tvSubtitle.text = anime.duration
+                    binding.tvRated.text = anime.rating
+                    binding.btnPlay.setOnClickListener {
+                        requireActivity().openYoutubeLink(anime.trailerUrl)
+                    }
                 }
             }
         }
     }
+
+    override fun provideToolbar() = binding.toolbar
 
     private fun hideError() {
 
@@ -75,11 +95,11 @@ class AnimeFragment : BaseFragment<FragmentAnimeBinding>() {
     }
 
     private fun showLoading() {
-        binding.content.loading.progressBar.show()
+
     }
 
     private fun hideLoading() {
-        binding.content.loading.progressBar.hide()
+
     }
 
     companion object {

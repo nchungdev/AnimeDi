@@ -1,7 +1,10 @@
 package com.chun.anime.util
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
 import com.chun.anime.AnimeApp
@@ -22,4 +25,14 @@ fun Activity.openInfo(view: View, otaku: Otaku) {
             putExtra(AnimeActivity.EXTRA_DATA, otaku)
         }
     startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, transitionName).toBundle())
+}
+
+fun Context.openYoutubeLink(url: String) {
+    val intentApp = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    try {
+        startActivity(intentApp)
+    } catch (ex: ActivityNotFoundException) {
+        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intentBrowser)
+    }
 }

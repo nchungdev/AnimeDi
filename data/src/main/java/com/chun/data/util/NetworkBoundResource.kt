@@ -44,7 +44,6 @@ object NetworkBoundResource {
         if (e == null) {
             cache.map {
                 if (it?.data != null) {
-                    Timber.e("Otaku ${it.data}")
                     Resource.Success(it.data!!)
                 } else {
                     Resource.Error(NullPointerException("No Cache"))

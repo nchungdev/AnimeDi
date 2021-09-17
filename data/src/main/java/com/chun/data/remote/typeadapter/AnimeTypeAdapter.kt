@@ -35,10 +35,10 @@ open class AnimeTypeAdapter : BaseTypeAdapter<Anime>() {
             "premiered" -> obj.premiered = reader.nextString()
             "broadcast" -> obj.broadcast = reader.nextString()
             "related" -> obj.related = RelatedTypeAdapter().read(reader)
-            "producers" -> obj.producers = parseArray(reader) { SimpleTypeAdapter().read(reader) }
-            "licensors" -> obj.licensors = parseArray(reader) { SimpleTypeAdapter().read(reader) }
-            "studios" -> obj.studios = parseArray(reader) { SimpleTypeAdapter().read(reader) }
-            "genres" -> obj.genres = parseArray(reader) { SimpleTypeAdapter().read(reader) }
+            "producers" -> obj.producers = parseArray(reader) { SimpleTypeAdapter().read(it) }
+            "licensors" -> obj.licensors = parseArray(reader) { SimpleTypeAdapter().read(it) }
+            "studios" -> obj.studios = parseArray(reader) { SimpleTypeAdapter().read(it) }
+            "genres" -> obj.genres = parseArray(reader) { SimpleTypeAdapter().read(it) }
             "opening_themes" -> obj.openingThemes = parseArray(reader) { it.nextString() }
             "ending_themes" -> obj.endingThemes = parseArray(reader) { it.nextString() }
             else -> reader.skipValue()

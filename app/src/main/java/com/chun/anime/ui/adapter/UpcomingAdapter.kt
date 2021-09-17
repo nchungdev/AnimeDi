@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.chun.anime.databinding.ItemPortraitBinding
 import com.chun.anime.ui.base.rv.Config
-import com.chun.anime.ui.base.rv.PagingAdapter
-import com.chun.anime.ui.base.rv.ViewHolder
+import com.chun.anime.ui.base.adapter.PagingAdapter
+import com.chun.anime.ui.base.adapter.ViewHolder
 import com.chun.domain.model.Anime
 
 class UpcomingAdapter(

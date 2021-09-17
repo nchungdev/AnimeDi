@@ -1,7 +1,9 @@
 package com.chun.anime.ui.base.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 import com.chun.anime.ui.base.ViewBindingProvider
 
@@ -14,8 +16,14 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(), ViewBinding
         _binding = provideViewBinding(layoutInflater, null)
         setContentView(binding.root)
         setupViews(savedInstanceState)
+        provideToolbar()?.let {
+            setSupportActionBar(it)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
         handleEvent(savedInstanceState)
     }
+
+    protected open fun provideToolbar(): Toolbar? = null
 
     abstract fun setupViews(savedInstanceState: Bundle?)
 
@@ -24,5 +32,13 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(), ViewBinding
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> {
+            super.onBackPressed()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 }

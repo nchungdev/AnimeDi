@@ -1,4 +1,4 @@
-package com.chun.anime.ui.base.rv
+package com.chun.anime.ui.base.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,6 +10,7 @@ import androidx.viewbinding.ViewBinding
 import com.chun.anime.R
 import com.chun.anime.databinding.ItemLoadingBinding
 import com.chun.anime.databinding.ItemRetryBinding
+import com.chun.anime.ui.base.rv.Config
 import com.chun.anime.util.UiUtil
 import com.chun.anime.util.isValidPosition
 import com.chun.domain.model.type.ViewType

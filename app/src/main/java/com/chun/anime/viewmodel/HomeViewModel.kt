@@ -8,9 +8,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val fetchHomeUseCase: FetchHomeUseCase) : LoadingViewModel() {
+    private lateinit var type: String
 
-    val homes = Transformations.switchMap(getData) { getData ->
-        return@switchMap if (getData) fetchHomeUseCase(FetchHomeUseCase.Params()).asLiveData()
-        else emptyLiveData()
+    fun initType(type: String) {
+        this.type = type
+    }
+
+    val homes by lazy {
+        Transformations.switchMap(getData) { getData ->
+            return@switchMap if (getData) fetchHomeUseCase(FetchHomeUseCase.Params(type)).asLiveData()
+            else emptyLiveData()
+        }
     }
 }

@@ -13,17 +13,17 @@ class HomeRepositoryImpl @Inject constructor(
     private val cacheProvider: CacheProvider
 ) : HomeRepository {
 
-    override suspend fun getHome(layouts: List<Layout>) = NetworkBoundResource(
-        localFetch = { cacheProvider.getHomes() },
+    override suspend fun getHome(type: String, layouts: List<Layout>) = NetworkBoundResource(
+        localFetch = { cacheProvider.get(type) },
         remoteFetch = {
             layouts.map { layout ->
                 layout.request
                     .takeIf { it != Request.DEFAULT_REQUEST }
-                    ?.let { process(layout, homeService.fetchTop(it.path, it.query)) }
+                    ?.let { process(layout, homeService.fetchData(it.path, it.query)) }
                     ?: Home.EMPTY
             }
         },
-        storeRemoteResult = { cacheProvider.saveHomes(it) }
+        storeRemoteResult = { cacheProvider.save(type, it) },
     )
 
     private fun process(layout: Layout, otakuList: ListResult<Otaku>): Home {
@@ -41,13 +41,5 @@ class HomeRepositoryImpl @Inject constructor(
             seasonResult.sessionYear,
             seasonResult.data!!,
         )
-    }
-
-    override suspend fun fetchGenre() {
-
-    }
-
-    override fun getTopCharacter() {
-
     }
 }

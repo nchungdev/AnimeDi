@@ -7,7 +7,8 @@
         <!-- Secondary brand color. -->
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorBackgroundBold">@color/bgBold</item>
-
+        <item name="android:actionModeCloseDrawable">@drawable/ic_arrow_back_24</item>
+        <item name="actionModeCloseButtonStyle">@style/Otaku.Widget.ActionButton.Close.Dark</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:navigationBarColor">@color/colorBackground</item>
@@ -17,6 +18,8 @@
         <item name="tcPrimary">@color/textPrimary</item>
         <item name="tcPrimaryDisable">@color/textPrimaryDisable</item>
         <item name="tcSecondary">@color/textSecondary</item>
+        <item name="tcPrimaryBlackOverlay">@color/textPrimaryBlackOverlay</item>
+        <item name="tcSecondaryBlackOverlay">@color/textSecondaryBlackOverlay</item>
 
         <!--background, selector-->
         <item name="colorBackground">@color/colorBackground</item>

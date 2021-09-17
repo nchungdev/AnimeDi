@@ -1,4 +1,4 @@
-package com.chun.anime.ui.base.rv
+package com.chun.anime.ui.base.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.chun.anime.R
+import com.chun.anime.ui.base.rv.Config
 import com.chun.anime.util.UiUtil
 import com.chun.domain.model.type.ViewType
 

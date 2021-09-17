@@ -31,12 +31,14 @@ class SearchActivity : NavigationActivity<ActivitySearchBinding>() {
         SearchResultPagerFragment::class.java.name
     )
 
+    override fun provideToolbar() = binding.toolbar
+
     override fun setupViews(savedInstanceState: Bundle?) {
         navigate(SearchRecentFragment::class.java.name)
     }
 
     override fun handleEvent(savedInstanceState: Bundle?) {
-        binding.searchView.setOnQueryTextListener(viewModel)
+        binding.searchView.onQueryTextListener = viewModel
         viewModel.keyboardVisible.observe(this) {
             SystemUtil.toggleKeyword(binding.searchView, it == true)
         }
@@ -66,5 +68,10 @@ class SearchActivity : NavigationActivity<ActivitySearchBinding>() {
         SearchRecentFragment::class.java.name -> SearchRecentFragment()
         SearchResultPagerFragment::class.java.name -> SearchResultPagerFragment()
         else -> throw IllegalStateException("Fragment not defined")
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(0, 0)
     }
 }

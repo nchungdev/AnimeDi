@@ -62,7 +62,6 @@ class BlurOverlayTransformation(private val overlayResId: Int) : BlurTransformat
 
     companion object {
         private const val VERSION = 1
-        private const val ID =
-            "com.chun.glide.transformations.BlurOverlayTransformation.$VERSION"
+        private const val ID = "com.chun.glide.transformations.BlurOverlayTransformation.$VERSION"
     }
 }
